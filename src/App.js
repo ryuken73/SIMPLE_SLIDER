@@ -74,7 +74,9 @@ function App() {
       <button onClick={addImage}>add</button>
       <p></p>
       <ShowEvents swiperRef={swiperRef}></ShowEvents>
-      <SwiperCustom>
+      <SwiperCustom
+        speed={500}
+      >
         <SwiperControl swiperRef={swiperRef}></SwiperControl>
         {imgsToShow.map(image => (
           <SliderCustom

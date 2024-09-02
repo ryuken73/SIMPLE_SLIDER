@@ -13,6 +13,7 @@ export default function SliderCustom(props) {
   const {children, index} = props
   const swiper = useSwiper();
   const isActive = swiper.activeIndex === index;
+  console.log('^^index:', index, swiper.activeIndex)
   return (
     <Container isActive={isActive}>
       {children}

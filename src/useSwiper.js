@@ -2,7 +2,5 @@ import { SwiperContext } from './SwiperProvider';
 import { useContext } from 'react'; 
 
 export function useSwiper() {
-  const {activeIndex, goNext} = useContext(SwiperContext);
-  console.log('^^ useSwiper:',activeIndex)
-  return {activeIndex, goNext}
+  return useContext(SwiperContext);
 };

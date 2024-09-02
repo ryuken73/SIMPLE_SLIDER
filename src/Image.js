@@ -8,6 +8,7 @@ export default function Image(props) {
   return (
     <>
       <img src={src}></img>
+      <p></p>
       <button onClick={onClick}>remove</button>
     </>
   )

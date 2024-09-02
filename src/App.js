@@ -1,9 +1,13 @@
 import './App.css';
 import React from 'react';
+import styled from 'styled-components';
 import SwiperCustom from './SwiperCustom';
 import SwiperControl from './SwiperControl';
 import SliderCustom from './SliderCustom';
 import Image from './Image';
+import ShowEvents from './ShowEvents';
+
+const Container = styled.div``
 
 const images = [
   './images/1.jpg',
@@ -16,6 +20,7 @@ const images = [
 
 function App() {
   const [imgsToShow, setImgsToShow] = React.useState(images);
+  const inputRef = React.useRef(null);
   const swiperRef = React.useRef(null);
 
   const goNext = React.useCallback(() => {
@@ -37,6 +42,16 @@ function App() {
     goPrev();
   }, [goPrev])
 
+  const addImage = React.useCallback(() => {
+    const path = inputRef.current.value
+    setImgsToShow(imgsToShow => {
+      return [
+        ...imgsToShow,
+        path
+      ]
+    })
+  }, [])
+
   const goSlider = React.useCallback((e) => {
     const targetIndex = imgsToShow.findIndex(img => img === e.target.id);
     const swiper = swiperRef.current;
@@ -44,7 +59,7 @@ function App() {
   }, [imgsToShow])
 
   return (
-    <SwiperCustom>
+    <Container>
       <div>total images: {imgsToShow.length}</div>
       <label>go next: </label>
       <button onClick={goNext}>goNext</button>
@@ -53,17 +68,23 @@ function App() {
       {imgsToShow.map((image, index) => (
         <button key={image} id={image} onClick={goSlider}>goto {index}</button>
       ))}
+      <div></div>
+      <label>add new image(path): </label>
+      <input ref={inputRef} placeholder='./images/7.jpg'></input>
+      <button onClick={addImage}>add</button>
       <p></p>
-      <SwiperControl swiperRef={swiperRef}></SwiperControl>
-      {imgsToShow.map(image => (
-        <SliderCustom
-          key={image}
-        >
-          
-          <Image delImage={delImage} src={image}></Image>
-        </SliderCustom>
-      ))}
-    </SwiperCustom>
+      <ShowEvents swiperRef={swiperRef}></ShowEvents>
+      <SwiperCustom>
+        <SwiperControl swiperRef={swiperRef}></SwiperControl>
+        {imgsToShow.map(image => (
+          <SliderCustom
+            key={image}
+          >
+            <Image delImage={delImage} src={image}></Image>
+          </SliderCustom>
+        ))}
+      </SwiperCustom>
+    </Container>
   );
 }
 

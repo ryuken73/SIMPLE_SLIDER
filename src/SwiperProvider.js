@@ -6,6 +6,13 @@ export const SwiperContext = createContext({})
 
 export function SwiperProvider({totalCount, children}) {
   const [activeIndex, setActiveIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    console.log('@@ dispatchEvent:', activeIndex)
+    const indexChangeEvent = new CustomEvent('realIndexChange', {detail: {activeIndex}})
+    window.dispatchEvent(indexChangeEvent)
+  }, [activeIndex])
+
   const nextIndex = React.useMemo(() => {
     const plusOne = activeIndex + 1;
     console.log('** recalculate nextIndex:', activeIndex, plusOne, totalCount)
@@ -14,6 +21,7 @@ export function SwiperProvider({totalCount, children}) {
     }
     return plusOne;
   }, [activeIndex, totalCount])
+
   const prevIndex = React.useMemo(() => {
     const minusOne = activeIndex - 1;
     console.log('** recalculate prevIndex:', activeIndex, minusOne, totalCount)
@@ -36,13 +44,27 @@ export function SwiperProvider({totalCount, children}) {
     setActiveIndex(slideNumber);
   }, [])
 
+  const on = React.useCallback((eventType, callback) => {
+    console.log('@@ append on listener')
+    window.addEventListener(eventType, callback);
+    return () => {
+      window.removeEventListener(eventType, callback)
+    }
+  }, [])
+
+  const off = React.useCallback((eventType, callback) => {
+    window.removeEventListener(eventType, callback);
+  }, [])
+
   const swiperInstance = {
+    on,
+    off,
     goNext,
     goPrev,
     slideTo,
     activeIndex,
     totalCount
   }
-  
+
   return <SwiperContext.Provider value={swiperInstance}>{children}</SwiperContext.Provider>
 }

@@ -3,30 +3,30 @@ import { createContext } from 'react';
 
 export const SwiperContext = createContext({})
 
-const getNextIndexLoop = (max, currentIndex) => {
-  const nextIndex = currentIndex + 1;
-  if(nextIndex === max){
-    return 0;
-  }
-  return nextIndex;
-}
 
 export function SwiperProvider({totalCount, children}) {
   const [activeIndex, setActiveIndex] = React.useState(0);
+  const nextIndex = React.useMemo(() => {
+    const plusOne = activeIndex + 1;
+    if(plusOne === totalCount){
+      return 0;
+    }
+    return plusOne;
+  }, [activeIndex, totalCount])
+  console.log('&&', nextIndex)
+
   const goNext = React.useCallback(() => {
-    setActiveIndex(activeIndex => {
-      const nextIndex = getNextIndexLoop(totalCount, activeIndex)
-      // console.log(nextIndex)
-      return nextIndex
-    })
-  }, [totalCount])
+    setActiveIndex(nextIndex);
+  }, [nextIndex])
+
   const goToSlide = React.useCallback((slideNumber) => {
     setActiveIndex(slideNumber);
   }, [])
+
   const swiperInstance = {
     goNext,
     goToSlide,
-    activeIndex
+    activeIndex,
   }
   return <SwiperContext.Provider value={swiperInstance}>{children}</SwiperContext.Provider>
 }

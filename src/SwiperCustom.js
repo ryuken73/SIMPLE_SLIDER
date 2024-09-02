@@ -1,5 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 import {SwiperProvider} from './SwiperProvider';
+
+const Container = styled.div`
+  /* position: relative; */
+`
 
 export default function SwiperCustom(props) {
   const {speed, children} = props;
@@ -21,7 +26,9 @@ export default function SwiperCustom(props) {
 
   return (
     <SwiperProvider totalCount={totalCount}>
-      <WrappedComponents></WrappedComponents>
+      <Container>
+        <WrappedComponents></WrappedComponents>
+      </Container>
     </SwiperProvider>
   )
 }

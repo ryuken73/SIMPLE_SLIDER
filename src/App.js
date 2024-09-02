@@ -7,7 +7,17 @@ import SliderCustom from './SliderCustom';
 import Image from './Image';
 import ShowEvents from './ShowEvents';
 
-const Container = styled.div``
+const Container = styled.div`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+`
+const Center = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+`
 
 const images = [
   './images/1.jpg',
@@ -60,32 +70,34 @@ function App() {
 
   return (
     <Container>
-      <div>total images: {imgsToShow.length}</div>
-      <label>go next: </label>
-      <button onClick={goNext}>goNext</button>
-      <div></div>
-      <label>go to slide number: </label>
-      {imgsToShow.map((image, index) => (
-        <button key={image} id={image} onClick={goSlider}>goto {index}</button>
-      ))}
-      <div></div>
-      <label>add new image(path): </label>
-      <input ref={inputRef} placeholder='./images/7.jpg'></input>
-      <button onClick={addImage}>add</button>
-      <p></p>
-      <ShowEvents swiperRef={swiperRef}></ShowEvents>
-      <SwiperCustom
-        speed={500}
-      >
-        <SwiperControl swiperRef={swiperRef}></SwiperControl>
-        {imgsToShow.map(image => (
-          <SliderCustom
-            key={image}
-          >
-            <Image delImage={delImage} src={image}></Image>
-          </SliderCustom>
+      <Center>
+        <div>total images: {imgsToShow.length}</div>
+        <label>go next: </label>
+        <button onClick={goNext}>goNext</button>
+        <div></div>
+        <label>go to slide number: </label>
+        {imgsToShow.map((image, index) => (
+          <button key={image} id={image} onClick={goSlider}>goto {index}</button>
         ))}
-      </SwiperCustom>
+        <div></div>
+        <label>add new image(path): </label>
+        <input ref={inputRef} placeholder='./images/7.jpg'></input>
+        <button onClick={addImage}>add</button>
+        <p></p>
+        <ShowEvents swiperRef={swiperRef}></ShowEvents>
+        <SwiperCustom
+          speed={500}
+        >
+          <SwiperControl swiperRef={swiperRef}></SwiperControl>
+          {imgsToShow.map(image => (
+            <SliderCustom
+              key={image}
+            >
+              <Image delImage={delImage} src={image}></Image>
+            </SliderCustom>
+          ))}
+        </SwiperCustom>
+      </Center>
     </Container>
   );
 }

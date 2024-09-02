@@ -1,24 +1,38 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import SwiperCustom from './SwiperCustom';
+import SwiperControl from './SwiperControl';
+import SliderCustom from './SliderCustom';
+import Image from './Image';
+
+const images = [
+  './images/1.jpg',
+  './images/2.jpg',
+  './images/3.jpg',
+  './images/4.jpg',
+  './images/5.jpg',
+  './images/6.jpg',
+]
 
 function App() {
+  const swiperRef = React.useRef(null);
+  const goNext = React.useCallback(() => {
+    swiperRef.current.goNext();
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <SwiperCustom>
+      <button onClick={goNext}>goNext</button>
+      <p></p>
+      <SwiperControl swiperRef={swiperRef}></SwiperControl>
+      {images.map(image => (
+        <SliderCustom
+          key={image}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          
+          <Image src={image}></Image>
+        </SliderCustom>
+      ))}
+    </SwiperCustom>
   );
 }
 

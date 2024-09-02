@@ -5,6 +5,7 @@ import { useSwiper } from './useSwiper';
 const Container = styled.div`
   position: absolute;
   opacity: ${props => props.isActive ? 1 : 0};
+  z-index: ${props => props.isActive ? 1 : 0};
   transition: 0.5s all;
 `
 

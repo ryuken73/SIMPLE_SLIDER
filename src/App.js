@@ -15,21 +15,31 @@ const images = [
 ]
 
 function App() {
+  const [imgToShow, setImgToShow] = React.useState(images);
   const swiperRef = React.useRef(null);
   const goNext = React.useCallback(() => {
-    swiperRef.current.goNext();
+    const swiper = swiperRef.current;
+    swiper.goNext();
   }, []);
+  const delImage = React.useCallback((path) => {
+    console.log('remove ', path)
+    setImgToShow(imgToShow => {
+      return imgToShow.filter(imgPath => {
+        return imgPath !== path;
+      })
+    })
+  }, [])
   return (
     <SwiperCustom>
       <button onClick={goNext}>goNext</button>
       <p></p>
       <SwiperControl swiperRef={swiperRef}></SwiperControl>
-      {images.map(image => (
+      {imgToShow.map(image => (
         <SliderCustom
           key={image}
         >
           
-          <Image src={image}></Image>
+          <Image delImage={delImage} src={image}></Image>
         </SliderCustom>
       ))}
     </SwiperCustom>

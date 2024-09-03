@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSwiper } from './useSwiper';
 
-export default function ShowEvents(props) {
+function ShowEvents(props) {
   const {swiperRef} = props;
   const [activeIndex, setActiveIndex] = React.useState();
 
@@ -19,3 +19,5 @@ export default function ShowEvents(props) {
     <div>activeIndex = {activeIndex}</div>
   )
 }
+
+export default React.memo(ShowEvents);

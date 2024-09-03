@@ -6,14 +6,17 @@ const Container = styled.div`
   /* position: relative; */
 `
 
-export default function SwiperCustom(props) {
+function SwiperCustom(props) {
   const {speed, children} = props;
   const [totalCount, setTotalCount] = React.useState(null);
+  // const [swiperSize, setSwiperSize] = React.useState({});
+  // console.log('###', swiperSize)
   const WrappedComponents = React.useCallback(() => {
     let slideIndex = 0;
     const result = [];
     React.Children.forEach(children, (child) => {
       if(child.type.name === 'SliderCustom'){
+        // result.push(React.cloneElement(child, {index: slideIndex, setSwiperSize, speed}));
         result.push(React.cloneElement(child, {index: slideIndex, speed}));
         slideIndex++
       } else {
@@ -32,3 +35,5 @@ export default function SwiperCustom(props) {
     </SwiperProvider>
   )
 }
+
+export default React.memo(SwiperCustom);

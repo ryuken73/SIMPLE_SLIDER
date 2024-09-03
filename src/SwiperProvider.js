@@ -4,7 +4,7 @@ import { createContext } from 'react';
 export const SwiperContext = createContext({})
 
 
-export function SwiperProvider({totalCount, children}) {
+function SwiperProviderFunc({totalCount, children}) {
   const [activeIndex, setActiveIndex] = React.useState(0);
 
   React.useEffect(() => {
@@ -68,3 +68,6 @@ export function SwiperProvider({totalCount, children}) {
 
   return <SwiperContext.Provider value={swiperInstance}>{children}</SwiperContext.Provider>
 }
+
+
+export const SwiperProvider = React.memo(SwiperProviderFunc)

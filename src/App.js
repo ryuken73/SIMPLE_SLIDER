@@ -17,6 +17,7 @@ const Center = styled.div`
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
+  width: 75vw;
 `
 
 const images = [
@@ -100,6 +101,7 @@ function App() {
             </SliderCustom>
           ))}
         </SwiperCustom>
+        <div>bottom</div>
       </Center>
     </Container>
   );

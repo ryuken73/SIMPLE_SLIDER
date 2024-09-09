@@ -3,7 +3,22 @@ import styled from 'styled-components';
 import {SwiperProvider} from './SwiperProvider';
 
 const Container = styled.div`
-  /* position: relative; */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+`
+const SwiperWrapper = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
 `
 
 function SwiperCustom(props) {
@@ -30,7 +45,9 @@ function SwiperCustom(props) {
   return (
     <SwiperProvider totalCount={totalCount}>
       <Container>
+        <SwiperWrapper>
         <WrappedComponents></WrappedComponents>
+        </SwiperWrapper>
       </Container>
     </SwiperProvider>
   )

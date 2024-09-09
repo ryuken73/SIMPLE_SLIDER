@@ -4,51 +4,33 @@ import { useSwiper } from './useSwiper';
 import useSize from './useSize';
 
 const Container = styled.div`
-  /* position: absolute; */
   opacity: ${props => props.isActive ? 1 : 0};
   z-index: ${props => props.isActive ? 1 : 0};
   transform: ${props => `translate(-${props.moveX}px, 0px)`};
-  transition-property: all;
+  transition-property: opacity;
   transition-duration: ${props => `${props.speed}ms`};
   width: 100%;
-  /* width: ${props => `${props.width}px`}; */
   height: 100%;
   flex-shrink: 0;
 `
 
 export default function SliderCustom(props) {
-  const {children, index, speed=500, name, setSwiperSize} = props
-  // const [size, setSize] = React.useState({width: 0, height: 0});
+  const {children, index, speed=500} = props
   const containerRef = React.useRef(null);
   const swiper = useSwiper();
   const isActive = swiper.activeIndex === index;
-  console.log('^^index:', index, swiper.activeIndex)
-  // React.useEffect(() => {
-  //   setSize(() => {
-  //     return {
-  //       width: containerRef.current.offsetWidth,
-  //       height: containerRef.current.offsetHeight,
-  //     }
-  //   })
-  // }, [])
+  // console.log('^^index:', index, swiper.activeIndex)
+  console.log('re-render SliderCustom')
   const sizeCurrent = useSize(containerRef);
-  let moveX;
-  let moveY;
-  // if(index === 0){
-    console.log('^^^', sizeCurrent)
-    if(sizeCurrent){
-      // setSize({
-      //   height: sizeCurrent.height,
-      //   width: sizeCurrent.width
-      // })
-    moveX = sizeCurrent.width * index;
-    moveY = sizeCurrent.height
-    }
-  // }
+  const moveX = sizeCurrent.width * index;
 
-  console.log('XX sizing', index, sizeCurrent, moveX, moveY);
   return (
-    <Container ref={containerRef} width={sizeCurrent.width} moveX={moveX} moveY={moveY} isActive={isActive} speed={speed}>
+    <Container 
+      ref={containerRef} 
+      moveX={moveX} 
+      isActive={isActive} 
+      speed={speed}
+    >
       {children}
     </Container>
   )

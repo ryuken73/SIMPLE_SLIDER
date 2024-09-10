@@ -31,7 +31,6 @@ const images = [
 
 function App() {
   const [imgsToShow, setImgsToShow] = React.useState(images);
-  const [swiperSize, setSwiperSize] = React.useState({});
   const inputRef = React.useRef(null);
   const swiperRef = React.useRef(null);
 
@@ -100,8 +99,6 @@ function App() {
           {imgsToShow.map(image => (
             <SliderCustom
               key={image}
-              // name="ryu"
-              setSwiperSize={setSwiperSize}
             >
               <Image key={image} src={image}></Image>
               <button onClick={onClick(image)}>del</button>
@@ -114,4 +111,4 @@ function App() {
   );
 }
 
-export default App;
+export default React.memo(App);

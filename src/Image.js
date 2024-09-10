@@ -8,16 +8,13 @@ const CustomImg = styled.img`
   width: 100%;
 `
 
-export default function Image(props) {
-  const {src, delImage} = props
-  const onClick = React.useCallback(() => {
-    delImage(src);
-  }, [delImage, src])
+function Image(props) {
+  const {src} = props
   return (
     <Container>
       <CustomImg src={src}></CustomImg>
-      <p></p>
-      <button onClick={onClick}>remove</button>
     </Container>
   )
 }
+
+export default React.memo(Image);

@@ -70,6 +70,12 @@ function App() {
     swiper.slideTo(targetIndex);
   }, [imgsToShow])
 
+  const onClick = React.useCallback((image) => {
+    return () => {
+      delImage(image);
+    }
+  }, [delImage])
+
   return (
     <Container>
       <Center>
@@ -97,7 +103,8 @@ function App() {
               // name="ryu"
               setSwiperSize={setSwiperSize}
             >
-              <Image delImage={delImage} src={image}></Image>
+              <Image key={image} src={image}></Image>
+              <button onClick={onClick(image)}>del</button>
             </SliderCustom>
           ))}
         </SwiperCustom>

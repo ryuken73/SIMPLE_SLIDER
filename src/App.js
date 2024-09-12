@@ -5,6 +5,7 @@ import SwiperCustom from './SwiperCustom';
 import SwiperControl from './SwiperControl';
 import SliderCustom from './SliderCustom';
 import Image from './Image';
+import Video from './Video';
 import ShowEvents from './ShowEvents';
 
 const Container = styled.div`
@@ -20,17 +21,24 @@ const Center = styled.div`
   width: 75vw;
 `
 
-const images = [
-  './images/1.jpg',
-  './images/2.jpg',
-  './images/3.jpg',
-  './images/4.jpg',
-  './images/5.jpg',
-  './images/6.jpg',
+// const images = [
+//   './images/1.jpg',
+//   './images/2.jpg',
+//   './images/3.jpg',
+//   './images/4.jpg',
+//   './images/5.jpg',
+//   './images/6.jpg',
+// ]
+const videos = [
+  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
 ]
 
 function App() {
-  const [imgsToShow, setImgsToShow] = React.useState(images);
+  const [imgsToShow, setImgsToShow] = React.useState(videos);
   const inputRef = React.useRef(null);
   const swiperRef = React.useRef(null);
 
@@ -100,7 +108,8 @@ function App() {
             <SliderCustom
               key={image}
             >
-              <Image key={image} src={image}></Image>
+              {/* <Image key={image} src={image}></Image> */}
+              <Video key={image} src={image}></Video>
               <button onClick={onClick(image)}>del</button>
             </SliderCustom>
           ))}

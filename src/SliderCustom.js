@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSwiper } from './useSwiper';
-import useSize from './useSize';
 
 const Container = styled.div`
   opacity: ${props => props.isActive ? 1 : 0};
@@ -15,6 +14,7 @@ const Container = styled.div`
 `
 
 export default function SliderCustom(props) {
+// function SliderCustom(props) {
   const {children, index, speed=500} = props
   const [width, setWidth] = React.useState(0);
   const containerRef = React.useRef(null);
@@ -29,10 +29,6 @@ export default function SliderCustom(props) {
       containerRef.current && observer.unobserve(containerRef.current);
     }
   }, [])
-  // console.log('^^index:', index, swiper.activeIndex)
-  // const sizeCurrent = useSize(containerRef);
-  // console.log('re-render SliderCustom', sizeCurrent)
-  // const moveX = sizeCurrent.width * index;
   console.log('re-render SliderCustom', width)
   const moveX = width * index;
 

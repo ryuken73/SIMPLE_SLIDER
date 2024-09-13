@@ -44,6 +44,8 @@ function SwiperProviderFunc({totalCount, children}) {
     setActiveIndex(slideNumber);
   }, [])
 
+  const slideToLoop = slideTo;
+
   const on = React.useCallback((eventType, callback) => {
     console.log('@@ append on listener')
     window.addEventListener(eventType, callback);
@@ -62,6 +64,7 @@ function SwiperProviderFunc({totalCount, children}) {
     goNext,
     goPrev,
     slideTo,
+    slideToLoop,
     activeIndex,
     totalCount
   }
